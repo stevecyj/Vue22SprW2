@@ -9,21 +9,24 @@ const app = createApp({
     return {
       // 先定義資料
       products: [],
-      singleProduct: {},
+      tempProduct: {},
     };
   },
   methods: {
     // 獲得 token 資料
     checkLogin() {
       // 取得 Token (Token 僅需設定一次)
-      const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+      const token = document.cookie.replace(
+        /(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/,
+        '$1'
+      );
       axios.defaults.headers.common['Authorization'] = token;
 
       const url = `${site}/api/user/check`;
       axios
         .post(url)
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           this.getProducts();
         })
         .catch((err) => {
@@ -38,23 +41,12 @@ const app = createApp({
       axios
         .get(url)
         .then((res) => {
-          // console.log(res.data);
+          console.log(res.data);
           this.products = res.data.products;
-
-          // 物件迴圈，to array
-          Object.values(this.products).forEach((product) => {
-            // console.log(product);
-          });
         })
         .catch((err) => {
           console.log(err.response);
         });
-    },
-
-    // single product detail
-    openProduct(item) {
-      // console.log(item);
-      this.singleProduct = item;
     },
   },
   mounted() {
