@@ -42,9 +42,9 @@ const app = createApp({
           this.products = res.data.products;
 
           // 物件迴圈，to array
-          Object.values(this.products).forEach((product) => {
-            // console.log(product);
-          });
+          // Object.values(this.products).forEach((product) => {
+          //   console.log(product);
+          // });
         })
         .catch((err) => {
           console.log(err.response);
